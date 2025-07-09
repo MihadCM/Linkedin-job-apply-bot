@@ -7,11 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 
 ACCOUNT_EMAIL = "admin@gmail.com" # Replace with your LinkedIn email
-<<<<<<< HEAD
-ACCOUNT_PASSWORD = "123abc"       # Replace with your LinkedIn password
-=======
 ACCOUNT_PASSWORD = "abc123"       # Replace with your LinkedIn password
->>>>>>> a1fd003 (commit your email)
 PHONE = "+91 9999999999"          # Replace with your phone number
 
 
@@ -33,9 +29,8 @@ chrome_options.add_experimental_option("detach", True)
 
 driver = webdriver.Chrome(options=chrome_options)
 
-driver.get("https://www.linkedin.com/jobs/search/?currentJobId=4261101801&f_AL=true&geoId=102713980&keywords=python%20automation&origin=JOB_SEARCH_PAGE_SEARCH_BUTTON&refresh=true")
-
-
+# Open LinkedIn Jobs Page and navigate to the job search URL and paste the job search URL for your desired job
+driver.get("https://www.linkedin.com/jobs/search/?currentJobId=4264704729&f_AL=true&f_E=2&f_TPR=r604800&geoId=105214831&keywords=python&origin=JOB_SEARCH_PAGE_JOB_FILTER&refresh=true")
 
 # Click Reject Cookies Button
 # reject_button = driver.find_element(by=By.CSS_SELECTOR, value='button[action-type="DENY"]')
@@ -55,7 +50,7 @@ password_field.send_keys(ACCOUNT_PASSWORD)
 password_field.send_keys(Keys.ENTER)
 
 
-# CAPTCHA - Solve Puzzle Manually
+# CAPTCHA - Solve Puzzle Manually after that press enter in terminal
 input("Press Enter when you have solved the Captcha")
 time.sleep(6)  # Wait for the user to solve the captcha manually
 
@@ -71,10 +66,9 @@ print(f"Found {len(all_listings)} listings")
 
 
 # Apply for Jobs
-
 count = 0
 skipped = 0
-for listing in all_listings[:3]:  # Limit to first 3 listings for testing
+for listing in all_listings[: 3]:  # Limit to first 3 listings for testing
     print(f"listing: {listing}\n")
     listing.click()
     print("Opening Listing")
@@ -83,8 +77,14 @@ for listing in all_listings[:3]:  # Limit to first 3 listings for testing
         # Click Apply Button
         
         apply_button = driver.find_element(by=By.CSS_SELECTOR, value=".jobs-apply-button")
-        apply_button.click()
-        print("Clicked Apply Button")
+        if apply_button.is_enabled():
+            apply_button.click()
+            print("Clicked Apply Button")
+        else:
+            abort_application()
+            skipped += 1
+            print("Apply button not enabled, application skipped.")
+            continue
 
         # Find an <input> element where the id contains phoneNumber
         time.sleep(5)
