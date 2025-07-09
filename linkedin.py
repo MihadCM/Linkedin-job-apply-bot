@@ -7,7 +7,11 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 
 ACCOUNT_EMAIL = "admin@gmail.com" # Replace with your LinkedIn email
+<<<<<<< HEAD
 ACCOUNT_PASSWORD = "123abc"       # Replace with your LinkedIn password
+=======
+ACCOUNT_PASSWORD = "abc123"       # Replace with your LinkedIn password
+>>>>>>> a1fd003 (commit your email)
 PHONE = "+91 9999999999"          # Replace with your phone number
 
 
